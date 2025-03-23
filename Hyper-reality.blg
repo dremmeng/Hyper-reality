@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Hyper-reality.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 15 items.
+Database file #1: references.bib
+Warning--can't use both author and editor fields in Angeles1998
+You've used 7 entries,
+            2118 wiz_defined-function locations,
+            539 strings with 4863 characters,
+and the built_in function-call counts, 1758 in all, are:
+= -- 158
+> -- 65
+< -- 1
++ -- 30
+- -- 20
+* -- 83
+:= -- 303
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 26
+chr.to.int$ -- 0
+cite$ -- 8
+duplicate$ -- 85
+empty$ -- 166
+format.name$ -- 20
+if$ -- 374
+int.to.chr$ -- 0
+int.to.str$ -- 7
+missing$ -- 12
+newline$ -- 38
+num.names$ -- 14
+pop$ -- 58
+preamble$ -- 1
+purify$ -- 24
+quote$ -- 0
+skip$ -- 49
+stack$ -- 0
+substring$ -- 57
+swap$ -- 13
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 1
+while$ -- 17
+width$ -- 8
+write$ -- 75
+(There was 1 warning)
