@@ -1,6 +1,7 @@
-\documentclass[10pt, oneside]{article} 
+\documentclass[10pt, oneside]{article}
 \usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry, cite}
-\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in} 
+
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
@@ -11,6 +12,8 @@
 \newcommand{\I}{\mathbb{I}}
 \newcommand{\HR}{\mathbb{HR}}
 \newcommand{\HRI}{\mathbb{HRI}}
+\newcommand{\K}{\mathbb{K}}
+
 
 \newtheorem{thm}{Theorem}
 \newtheorem{defn}{Definition}
@@ -25,437 +28,130 @@
 \title{Hyper-Real and Infinitesimal Analysis}
 \author{[Drew Remmenga drewremmenga@gmail.com unaffiliated]}
 
+
 \begin{document}
+
 
 \maketitle
 \begin{abstract}
-    Something about non-standard analysis is bothersome. Namely the deletion of epsilons when they were such a valuable tool. In this work we build on nonstandard analysis and generalize the dual numbers.
-    This gives rise to a nontrivial example of a super space by generalizing the dual numbers. 
+   Something about non-standard analysis is bothersome. Namely the deletion of epsilons when they were such a valuable tool. In this work we build on nonstandard analysis and generalize the dual numbers.
 \end{abstract}
 \begin{keywords}
-    split numbers, dual numbers, nonstandard analysis, rings, groups, fields, lie algebras
+   hyper-complex numbers, nonstandard analysis, rings
 \end{keywords}
-\section{Basic Properties of Infinitesimals and Hyper-Reals}
-\begin{defn}
-    A number is called an infinitesimal \cite{robinson1966} (denoted \( \mathbb{I} \)) if it can be expressed as 
-    \[
-    v = a \epsilon^n
-    \]
-    for some \( n \in \mathbb{N}_0 \), where \( a \in \mathbb{R} \) (or more generally, some field \( F \)) and \( \epsilon \neq 0\) is a fixed infinitesimal element. The infinitesimal element \( \epsilon \) satisfies the property that \( \epsilon^n \cdot \epsilon^m = \epsilon^{n+m} \) eqn 1. Moreover, we assume that \( \epsilon \) is smaller than any positive real number (i.e., \( \epsilon \to 0 \) in the standard sense) eqn 2.
-\end{defn}
-This forms a group under addition. \cite{gallian2016}
-\begin{proof}
-    The identity element exists and is namely zero.
-    The group is associative. Take elements x,y, and z, $\in \I$. x+(y+z)=(x+y)+z. This is true since for whatever field we select is associative under addition. Indeed if the selected field is abelian this group is abelian. 
-    The group is closed. Take elements x,y $\in \I$ then x+y $\in I$. This is true since for whatever field we select we are closed under addition. 
-    The group has inverses. For an element x $\in \I$ the inverse is -x.
-\end{proof} 
-\begin{rem}
-    The sum of infinitesimals in different powers of $n$ form a commutative ring with identity. 
-\end{rem}
-\begin{proof}
-    Let \( \I^{*} [\R] \) denote the set of powers of infinitesimals in \( \epsilon \) with coefficients in a field (or commutative ring) \( F\). A general infinitesimal in \( F\) can be written as:
+\section{Basic Properties of Infinitesimals}
+\textbf{Definition 1 (Hyper-real ring).} Let $\K$ be a field (e.g., $\mathbb{R}$ or $\mathbb{C}$). The \emph{hyper-real ring} $\HR[\K]$ is the commutative ring of formal Laurent polynomials in an indeterminate $\epsilon$ with coefficients in $\K$:
 \[
-v = a_n \epsilon^n + a_{n-1} \epsilon^{n-1} + \cdots + a_1 \epsilon + a_0,
+\HR[\K] = \left\{ \sum_{n=k}^{m} a_n \epsilon^n  \;\middle|\; a_n \in \K,\; k,m \in \mathbb{Z},\; k \leq m \right\}
 \]
-where \( a_n, a_{n-1}, \dots, a_1, a_0 \in \mathbb{F} \) and \( n \geq 0 \).
-
-We will prove that \( \I^{*}[\R] \) is a ring by verifying the following ring axioms:
-
-\textbf{1. Additive Closure}
-
-For any two infinitesimals \( v = a_n \epsilon^n + \cdots + a_0 \) and \( w = b_m \epsilon^m + \cdots + b_0 \) in \( \I^{*}[R] \), their sum is the infinitesimal
-\[
-w + v = (a_n \epsilon^n + \cdots + a_0) + (b_m \epsilon^m + \cdots + b_0) = (a_n + b_n) \epsilon^n + \cdots + (a_0 + b_0).
-\]
-Since the sum of coefficients \( a_i + b_i \) is in \( \R \) (since \( \R \) is closed under addition), \( v + w \in \I^{*}[\R] \). Therefore, \( \I^{*}[\R] \) is closed under addition.
-
-\textbf{2. Additive Associativity}
-
-For all infinitesimals \( v, w, u \in \I^{*}[\R] \), we have:
-\[
-(v + w) + u = v + (w + u),
-\]
-since addition of infinitesimals is performed coefficient-wise, and addition in \( \R \) is associative. Thus, addition is associative in \( \I^{*}[\R] \).
-
-\textbf{3. Additive Identity}
-
-The infinitesimal \( 0 \in \I^{*}[\R] \) is the zero infinitesimal:
-\[
-0 = 0 \cdot \epsilon^n + 0 \cdot \epsilon^{n-1} + \cdots + 0,
-\]
-where all coefficients are zero. For any infinitesimal \( v = a_n \epsilon^n + \cdots + a_0 \), we have:
-\[
-v + 0 = v,
-\]
-since the sum of any infinitesimal and the zero infinitesimal is the original infinitesimal. Therefore, \( 0 \) is the additive identity in \( \I^{*}[\R] \).
-
-\textbf{4. Additive Inverses}
-
-For any infinitesimal \( v = a_n \epsilon^n + \cdots + a_0 \in \I^{*}[\R] \), the additive inverse is the infinitesimal:
-\[
-- v = -a_n \epsilon^n - \cdots - a_0,
-\]
-since \( -a_i \in \R \) for each \( i \). We have:
-\[
-v + (-v) = 0,
-\]
-which shows that every element in \( \I^{*}[\R] \) has an additive inverse.
-
-\textbf{5. Commutativity of Addition}
-
-For any infinitesimal \( v = a_n \epsilon^n + \cdots + a_0 \) and \( w = b_m \epsilon^m + \cdots + b_0 \) in \( \I[\R] \), we have:
-\[
-w + v = v + w,
-\]
-since addition of polynomials is commutative at the level of coefficients in \( \mathbb{F} \), and \( \mathbb{F} \) is commutative under addition.
-
-\textbf{6. Multiplicative Closure}
-
-For any two infinitesimal \( v = a_n \epsilon^n + \cdots + a_0 \) and \( w = b_m \epsilon^m + \cdots + b_0 \), their product is:
-\[
-v \cdot w = \left( \sum_{i=0}^n a_i \epsilon^i \right) \cdot \left( \sum_{j=0}^m b_j \epsilon^j \right) = \sum_{k=0}^{n+m} c_k \epsilon^k,
-\]
-where the coefficients \( c_k \) are sums of products of the coefficients of \( v \) and \( w \). Since the coefficients are sums of elements of \( \R \), and \( \R \) is closed under multiplication, \( v \cdot w \in \I^{*}[\R] \). Thus, \( \I^{*}[\R] \) is closed under multiplication.
-
-\textbf{7. Multiplicative Associativity}
-
-For all infinitesimals \( v, w, u \in \I^{*}[\R] \), multiplication is associative, since multiplication of infinitesimals is defined in terms of associativity of multiplication in \(\R \). Therefore, for all \( v, w, u \in \I^{*}[\R] \),
-\[
-(v \cdot w) \cdot u = v \cdot (w \cdot u).
-\]
-
-\textbf{8. Distributivity of Multiplication over Addition}
-
-For any infinitesimals \( v, w, u \in \I^{*}[\R] \), multiplication distributes over addition:
-\[
-v \cdot (w + u) = v \cdot v + w \cdot u,
-\]
-and similarly,
-\[
-(u + w) \cdot v = u \cdot v + w \cdot v.
-\]
-These distributive properties hold because the distributive property in \( \R\) extends to the multiplication of infinitesimals.
-\end{proof}
-\begin{rem}
-    The entire set of $\sum_{n=0}^N a_n \epsilon^{n}$ forms a ring isomorphic to the polynomials. 
-\end{rem}
-\begin{proof}
-    Take a map $\phi: \epsilon \to x$. Since this is an identity map it is bijective. 
-\end{proof}
-\begin{defn}
-    A number is called a hyper-real (denoted \( \HR \)) if it can be expressed as
-    \[
-    v = a \omega^n
-    \]
-    for some \( n \in \mathbb{N}_0 \), where \( a \in \mathbb{R} \) (or more generally, some field \( F \)), \( \omega \neq \infty \) is an infinitesimal or infinite element, and \( \omega^n \cdot \omega^m = \omega^{n+m} \). The value of \( \omega \) represents a special element that satisfies \( \lim_{n \to \infty} \omega^n = 0 \) or \( \lim_{n \to -\infty} \omega^n = \infty \), depending on whether \( \omega \) is infinitesimal or infinite.
-\end{defn}
-\begin{rem}
-    The set of hyper-real numbers forms a group under addition, isomorphic to the set of infinitesimal numbers \( \I \).
-\end{rem}
-\begin{proof}
-    The isomorphism $\phi: \I \to \HR: \epsilon \to \omega$ is an identity map and so is clearly bijective. 
-\end{proof}
-\begin{rem}
-    Linear combinations of powers of different powers of $n$ in $\I$ and $\HR$ are isomorphic to p-adic groups depending on the selection of the field \cite{gouvea2003}. 
-\end{rem}
-\begin{proof}
-    Let \( \mathbb{Z}_p \) be the additive group of p-adic integers, and let \( F_p \) be the finite field with \( p \) elements. Consider the isomorphism \( \phi: \mathbb{I}[F_p] \to \mathbb{Z}_p \), where \( \mathbb{I}[F_p] \) is a certain structure related to \( F_p \), and \( \phi \) is defined by \( \phi(\epsilon^n) = p^n \), where \( \epsilon^n \) are elements in \( \mathbb{I}[F_p] \) and \( p^n \) are elements in \( \mathbb{Z}_p \).
-
-    To prove that \( \phi \) is an isomorphism, we will show that it is both injective and surjective.
-
-    \textbf{Injectivity:} Suppose \( \phi(x_1) = \phi(x_2) \) for some \( x_1, x_2 \in \mathbb{I}[F_p] \). Then, we have \( \phi(x_1) = \phi(x_2) \), meaning the images of \( x_1 \) and \( x_2 \) in \( \mathbb{Z}_p \) are the same. Since \( \phi \) is defined in terms of powers of \( \epsilon \) in \( \mathbb{I}[F_p] \) and powers of \( p \) in \( \mathbb{Z}_p \), and these powers of \( \epsilon \) and \( p \) are orthogonal, it follows that if the images are equal, then \( x_1 = x_2 \). Therefore, \( \phi \) is injective.
-
-    \textbf{Surjectivity:} Let \( y \in \mathbb{Z}_p \). We need to show that there exists \( x \in \mathbb{I}[F_p] \) such that \( \phi(x) = y \). 
-
-    Any element \( y \in \mathbb{Z}_p \) can be expressed as a series in powers of \( p \), i.e.,
-    \[
-    y = \sum_{n=0}^{\infty} a_n p^n,
-    \]
-    where \( a_n \in \{0, 1, \dots, p-1\} \).
-
-    Since \( \phi(\epsilon^n) = p^n \), we can find an element \( x \in \mathbb{I}[F_p] \) corresponding to the powers of \( \epsilon \), where the coefficients of the powers of \( \epsilon \) match the coefficients of the powers of \( p \) in the expansion of \( y \). Specifically, for each \( n \), the coefficient \( a_n \) of \( p^n \) in the expansion of \( y \) corresponds to the coefficient in the expansion of \( x \) in terms of powers of \( \epsilon \). Thus, for every \( y \in \mathbb{Z}_p \), there exists an \( x \in \mathbb{I}[F_p] \) such that \( \phi(x) = y \). Therefore, \( \phi \) is surjective.
-
-    Since \( \phi \) is both injective and surjective, it is a bijection, and hence an isomorphism of groups.
-\end{proof}
-\begin{defn}
-    A number is called \textit{Hyper-Real and Infinitesimal} (denoted \( \HRI \)) if it is of the form
-    \[
-    v = a \epsilon^n
-    \]
-    where \( a \in \mathbb{R} \) (or some field \( F \), but we will take \( \mathbb{R} \) for simplicity), \( n \in \mathbb{Z} \), and \( \epsilon \) is a fixed infinitesimal element satisfying \( \epsilon^n \cdot \epsilon^m = \epsilon^{n+m} \) by eqn 1. This allows for both positive and negative powers of \( \epsilon \), making \( v \) potentially infinitesimal (if \( n > 0 \)) or infinite (if \( n < 0 \)).
-\end{defn}
-\begin{rem}
-    Signular entries in the field with a single unit in this space under multiplication form a group. 
-\end{rem}
-\begin{proof}
-    The identity exists and is namely $\epsilon^{0}$.
-    All elements have an inverse, for $\epsilon^{n}$ the inverse is $\epsilon^{-n}$.
-    The set is closed. Under the group operation two entries $\epsilon^{n}*epsilon^{m} = \epsilon^{n+m}$ which is in the group. 
-    The set is associative and is abelian. For any three entries $\epsilon^{n} * (\epsilon^{m} * \epsilon^{p}) = (\epsilon^{n} * \epsilon^{m}) * \epsilon^{p}=\epsilon^{n+m+p}$ by eqn 1.
-\end{proof}
-\begin{rem}
-    Single entries in powers of $\epsilon$ in this space form a field. 
-\end{rem}
-\begin{proof}
-    To show that this set forms a field, we need to verify the field properties.
-
-    \textbf{1. Addition:} Under addition, the group properties are clear. The sum of two elements \( a_n \epsilon^n \) and \( b_m \epsilon^m \) is simply the sum of the coefficients, with the same power of \( \epsilon \). This is closed under addition and satisfies associativity and the existence of an additive identity (the zero element).
-
-    \textbf{2. Multiplication:} The set is closed under multiplication. The product of two elements \( a_n \epsilon^n \) and \( b_m \epsilon^m \) is \( (a_n b_m) \epsilon^{n+m} \) by eqn 1, which is again of the same form. Multiplication is commutative, as the multiplication of real numbers is commutative and \( \epsilon^n \cdot \epsilon^m = \epsilon^{n+m} \) by definition and eqn 1.
-
-    \textbf{3. Additive Identity:} The element 0 (the sum of all \( a_n \epsilon^n \) terms with \( a_n = 0 \)) acts as the additive identity.
-
-    \textbf{4. Multiplicative Identity:} The element 1 (which corresponds to \(1  \epsilon^0 \)) is the multiplicative identity.
-
-    \textbf{5. Inverses:} Every non-zero element has a multiplicative inverse. If \( v = a_n \epsilon^n \) with \( n \geq 0 \), its inverse is \( \frac{1}{a_n} \epsilon^{-n} \). For \( n < 0 \), the inverse is \( \frac{1}{a_n} \epsilon^{-n} \), so division by non-zero elements is always possible.
-
-    \textbf{6. Commutativity of Multiplication:} Multiplication is commutative, as the multiplication of real numbers is commutative and \( \epsilon^n \cdot \epsilon^m = \epsilon^{n+m} \).
-
-    Since all the field axioms are satisfied, this set forms a field.
-\end{proof}
-\begin{rem}
-    Sums over different powers of epsilon are isomorphic to the ring of general Laurent polynomials \cite{beck2020}.
-\end{rem}
-\begin{proof}
-    A laurent polynomial over a field is given by $\sum_{n=-\infty}^{\infty} a_{n}z^{n}$. A map $\phi: \epsilon \to z$ is an identity map. Therefore it is bijective. 
-\end{proof}
-\begin{rem}
-    We have two options for derivatives in $\HRI$. We can recover derivative rules from $\C$ and $\R$ by taking $\epsilon^{\infty} = 0$ and applying the limit definition. Then we have:
-    \begin{align*}
-        \lim_{h \to \epsilon^{\infty}}  \frac{f(x+h)-f(x)}{h} = f'(x) \\
-    \end{align*}
-    in which case differentiation in $\HRI$ is the same as in $\R$ and $\C$.
-    However if we were to use regular limit definition of the derivative we receive a different result. Let's apply this non-naive differentiation to a trivial function to show this. 
-    \begin{align*}
-        f(x)&=x^2\\
-        f'(x)&=\lim_{h \to 0} \frac{f(x+h)-f(x)}{h}\\
-        f'(x)&= \lim_{h \to 0} \frac{x^2+2hx+h^2-x^2}{h}\\
-        f'(x) &= \lim_{h \to 0} 2x+h    \\
-        f'(x) &= 2x+\epsilon\\
-    \end{align*}
-    This trivial example reveals limit differentiation is not the same in $\HRI$ as in $\C$ or $\R$. It is also clear integration as an antiderivative becomes very obstinate. 
-\end{rem}
-\begin{rem}
-    We can find a function which is its own derivative in this space using the limit definition of the derivative.
-\end{rem}
-\begin{proof}
-    \[
-    f'(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}, 
-    f'(x) = f(x)
-    \]
-    \begin{align*}
-        f'(x) &= \epsilon^{-1} f(x+\epsilon)-\epsilon^{-1} f(x) \\
-        \epsilon f'(x) &= f(x+\epsilon)- f(x) \\
-        (\epsilon + 1)f'(x) &= f(x + \epsilon) \\
-        (\epsilon + 1)Ae^{\lambda x} &= Ae^{\lambda x+\lambda \epsilon} \\
-        Ae^{\lambda x} (\epsilon + 1) &= Ae^{\lambda x}e^{\lambda \epsilon} \\
-        (\epsilon + 1) &= e^{\lambda \epsilon} \\
-        ln(\epsilon + 1) &= \lambda \epsilon \\
-        \frac{ln(\epsilon + 1)}{\epsilon} &= \lambda \\
-        f(x) &= Ae^{\frac{ln(\epsilon + 1)}{\epsilon}x}\\
-    \end{align*}
-\end{proof}
-\begin{rem}
-    Analytic functions can be extended to a vector of entries in $\HRI$ using its Taylor series. 
-\end{rem}
-\begin{rem}
-    $\HRI$ with truncation in powers of $\epsilon$ such that $\epsilon^{\pm m}=0$ where $m$ is $m>c\in \N$ forms a super space.  
-\end{rem}
-\begin{proof}
-    Consider $\I$. Take entries in $\epsilon^{0}$. From this we recover $\R$ which is a super space. Take entries in $\epsilon^0 $ and $ \epsilon^1$ with this truncation at $c=1$. From this we recover the dual numbers \cite{Angeles1998} Consider $\HR$ WLOG. 
-    Then by induction we will assume c=k is a super space and we must prove $k+1$ is a super space. From this we recover a super space plus an unknown factor dimension. This forms a super space which adds to the unknown unit. 
-    In the limit as we go towards $c \to \infty$ we recover a space isomorphic to $\R^{2c+1}$ which is a super space. Truly there is no exact word for this infinite dimensional space in parlance. 
-\end{proof}
-\begin{rem}
-    Notice if we chose to set $\epsilon^2=1$ and take only $\I$ we recover the split numbers \cite{sobczyk2025}.
-\end{rem}
-\begin{rem}
-    When we take $\HRI[\mathbb{C}]$ and truncate at $c = 1$ with coefficients in powers of $\epsilon = 1$ and letting $\epsilon^1 = 0$, we recover the Riemann Sphere \cite{beck2020}.
-\end{rem}
-\begin{rem}
-    $\HRI[\R]$ forms a manifold. 
-\end{rem}
-\begin{proof}
-    Take points represented by Hyper real and infinitesimal numbers. Take one of these homogeneous coordinates to be non-zero. Without loss of generality, we can define an atlas on the infinite space by dividing by this nonzero term.
-    We shall call this open set U. All points in this space will have at least one nonzero homogeneous coordinate so it will belong to this open set. We can define another coordinate patch T by dividing by a different nonzero term. Then these two cover the entire space without loss of generality. 
-    Maps between these coordinate patches are smooth, indeed they are rational with respect to the coordinates. So this forms a smooth manifold. 
-\end{proof}
-\begin{rem}
-    $\HRI[\R]$ is therefore a lie algebra since it is a smooth manifold and a group.
-\end{rem}
-\begin{rem}
-    Integration is an obstinate problem. For example: take $f(x) = x + \epsilon$. Then we can attempt an antiderivative. 
-    \begin{align*}
-        \int f(x) dx_{\epsilon} &= \int (x + \epsilon)dx_{\epsilon} \\
-        & = \frac{x^{2}}{2} + \frac{1}{2} \epsilon x + C\\
-    \end{align*}
-\end{rem}
-The Witt Algebra extension \cite{Kac1990} has two options in $\HRI$ as we have two differentiation options. This Witte idea forms two more lie algebras one for $\epsilon$ differentiation and one for $\epsilon^{\infty}$ differentiation. 
-\begin{rem}
-    The space of $\epsilon^{\infty}$ derivatives on Laurent polynomials with coefficients from $\HRI[\C]$ which we will denote $\HRI[\C][z,z^{-1}]\frac{d_{\infty}}{dz}$ form a lie algebra.
-\end{rem}
-\begin{proof}
-    Claim: For differentiation $D_{\infty}(z)$ on the ring of Laurent Polynomials, $n \geq 1$, $D_{\infty}(z^{n})=nz^{n-1}D_{\infty}(z)$
-    Sps for $k \geq 1$ we have $D(z^{k})=kz^{k-1}D(z)$ and consider:
-    \begin{align*}
-        D_{\infty}(z^{k+1}) &= D_{\infty}(z*z^{k})\\
-        &= z D_{\infty}(z^k)+z^k D_{\infty}(z) \\
-        &= z k D_{\infty}(z^{k-1}) + z^k D_{\infty}(z) \\
-        &= z (k+1) z^k D_{\infty}(z) \\
-    \end{align*}
-    Claim: For all $n \leq -1$, $D_{\infty}(z^{n}) = nz^{n-1} D(z)$. Set $n = -m$ for $m \geq 1$.
-    \begin{align*}
-        0 &= D_{\infty}(1)\\ 
-        &= D_{\infty}(z^{m}z^{-m})\\
-        &= D_{\infty}(z^m) z^{-m} + D_{\infty}(z^{-m})z^m \\
-        &= mz^{m-1} D_{\infty}(z) z^{-m} + z^m D_{\infty}(z^{-m}) \\
-        z^{m} D_{\infty} (z^{m}) &= \frac{-m D_{\infty}(z)}{z} \\
-        D_{\infty}(z^{-m}) &= \frac{-m D_{\infty}(z)}{z^{m+1}} \\
-        D_{\infty}(z^{-m}) &= -m z^{-m-1} D_{\infty}(z) \\
-        D_{\infty}(z^{-n}) &= -n z^{-n-1} D_{\infty}(z) \\
-    \end{align*}
-    Corollary: For all $a(z) \in \HRI[\C][z,z^{-1}] \implies D_{\infty}(a(z)) = \frac{d_{\infty}a}{dz}D_{\infty}(z)$ with $D_{\infty} \in \HRI[\C][z,z^{-1}]$
-    Take:
-    \begin{align*}
-        a(z) &= \sum_{n=-m_{1}}^{m_{2}} a_{n} z^n \\
-        D_{\infty} (a(z)) &= \sum_{n=-m_{1}}^{m_{2}} a_{n} D_{\infty}(z^n) \\
-        &= \sum_{n=-m_{1}}^{m_{2}} n a_{n} z^{n-1} D_{\infty}(z) \\
-        &= D_{\infty}(z) \sum_{n=-m_{1}}^{m_{2}} n a_{n} z^{n-1} \\
-        &= \frac{d_{\infty}a}{dz} D_{\infty}(z) \\
-    \end{align*}
-    \begin{defn}
-        $WiH_{\infty} = \{ p(z) \frac{d_{\infty}}{dz} | p(z) \in \HRI[\C][z,z^{-1}] \}$ for $n \in \Z$ define $L_{n} = -z^{n+1} \frac{d_{\infty}}{dz}$.
-    \end{defn}
-    Then $\{L_{n} | n \in \Z \}$ is a basis for $WiH_{\infty}$. We want to show $[L_{m},L_{n}]= -(m-n) L_{m+n}$. Take $a(z) \in \HRI[\C][z,z^{-1}]$
-    \begin{proof}
-        Composition of derivations $[D_1, D_2]=D_1 D_2 - D_2 D_1$ \cite{Kac1990}
-        \begin{align*}
-            [L_m, L_n] a(z) &= L_m L_n a(z) - L_n L_m a(z) \\
-            &= L_m (-z^{n+1}a'(z)) - L_n ( -z^{m+1} a'(z))\\
-            &= -z^{m+1} \frac{d_\infty}{dz} (-z^{n+1} a'(z)) - (-1) z^{n+1} \frac{d_{\infty}}{dz} (-z^{m+1} a'(z)) \\
-            &= z^{m+1} (n+1) z^n a'(z) + z^{n+1} a''(z) - z^{n+1} ((m+1)z^n a(z)+z^{n+1} a''(z)) \\
-            &= -(-m + n) z^{m+n+1} a'(z) \\
-            &= -(m-n)L_{m+n} a(z) \\
-        \end{align*}
-    \end{proof} 
-\end{proof}
-\begin{rem}
-    The space of $\epsilon$ derivatives of Laurent polynomials with coefficients from $\HRI[\C]$ which we will denote 
-    $\HRI[\C][z,z^{-1}]\frac{d_{\epsilon}}{dz}$ forms a lie algebra. 
-\end{rem}
-\begin{proof}
-    Claim: For differentiation $D_{\epsilon} (z)$ on the ring of Laurent Polynomials, $n \geq 1$, $D_{\epsilon} (z^{n})=nz^{n-1}D_{\epsilon}(z)$
-    Sps for $k \geq 1$ we have $D_{\epsilon} (z^{k})=a(z) D_{\epsilon}(z)$ and consider:
-    \begin{align*}
-        D_{\epsilon}(z^{k+1}) &= D_{\epsilon}(z*z^{k})\\
-        &= z D_{\epsilon}(z^k)+z^k D_{\epsilon}(z) \\
-        &= z k D_{\epsilon}(z^{k-1}) + z^k D_{\epsilon}(z) \\
-        &= a(z) D_{\epsilon}(z) \\
-    \end{align*}
-    Corollary: For all $a(z) \in \HRI[\C][z] \implies D_{\epsilon}(a(z)) = \frac{d_{\epsilon}a}{dz}D_{\epsilon}(z)$ with $D_{\epsilon}(z) \in \HRI[\C][z]$
-    Take:
-    \begin{align*}
-        a(z) &= \sum_{n=0}^{m} a_{n} z^n \\
-        D_{\epsilon} (a(z)) &= \sum_{n=0}^{m} a_{n} D_{\epsilon}(z^n) \\
-        &= \sum_{n=0}^{m} n b_{n} z^{n-1} D_{\epsilon}(z) \\
-        &= D_{\epsilon}(z) \sum_{n=0}^{m} n b_{n} z^{n-1} \\
-        &= \frac{d_{\epsilon}b}{dz} D_{\epsilon}(z) \\
-    \end{align*}
-    Where $b(z) = sum_{n=0}^{m-1} b_{n} z^{n}$
-    \begin{defn}
-        $WiH_{\epsilon} = \{ p(z) \frac{d_{\epsilon}}{dz} | p(z) \in \HRI[\C][z] \}$ for $n \in \N^{0}$ define $L_{n}a(z) = a(z) \frac{d_{\epsilon}}{dz}=a'(z)$.
-    \end{defn}
-    Then $\{L_{n} | n \in \N^{0} \}$ is a basis for $WiH_{\epsilon}$. We want to show $[L_{m},L_{n}]=0$. Take $a(z) \in \HRI[\C][z]$
-    \begin{proof}
-        Composition of derivations $[D_1, D_2]=D_1 D_2 - D_2 D_1$ \cite{Kac1990}
-        \begin{align*}
-            [L_m, L_n] a(z) &= L_m L_n a(z) - L_n L_m a(z) \\
-            &= L_m a'(z) - L_n a'(z)\\
-            &=  \frac{d_\epsilon}{dz} a'(z) - \frac{d_{\epsilon}}{dz} a'(z) \\
-            &= -(m-n) L_{m+n} a(z)\\
-        \end{align*}
-    \end{proof} 
-\end{proof}
-Now we need to generalize the the laurent polynomials into a new ring. 
-\begin{proof}
-    Take entries from $p_n(z)$ and $q_n(z) \in \HRI[\C][z]$ With entries in polynomials with positive powers of exponents. Then we can generalize laurent polynomials by taking $\sum_{n=m}^{M} \frac{p_n(z)}{q_n(z)}$ for $M,m \in \Z$.
-    We shall denote this new ring $\HRI[\C][pq](x)$. First we shall prove it forms a ring. 
-    To show that this set forms a field, we need to verify the ring properties.
-
-    \textbf{1. Addition:} Under addition, the group properties are clear. The sum of two elements \( a \) and \( b \) lies within the space of sums of polynomials divided by other polynomials. Inverses may be obtained by taking inverses of coefficients in p(x).
-
-    \textbf{2. Multiplication:} The set is closed under multiplication. The multiplication of two elements a and b is simply the sum of polynomials divided by other polynomials. Multiplication is commutative, as the multiplication of real numbers is commutative and \( \epsilon^n \cdot \epsilon^m = \epsilon^{n+m} \) by definition.
-
-    \textbf{3. Additive Identity:} The element 0 (the sum of all \( a_n \) terms with \( a_n = 0 \)) acts as the additive identity.
-
-    \textbf{4. Multiplicative Identity:} The element 1 (which corresponds to \(p(x) = 1, q(x)=1, N=1, m=1 \)) is the multiplicative identity.
-
-    \textbf{5. Commutativity of Multiplication:} Multiplication is commutative, as the multiplication of real numbers is commutative and \( \epsilon^n \cdot \epsilon^m = \epsilon^{n+m} \) by eqn 1.
-
-    Corollary: Note that if we limit entries to single polynomials divided by other polynomials we get a field where multiplicative inverse of an element $a(z)$ is $(p(z))^{-1}$.
-    Since all the ring axioms are satisfied, this set forms a ring.
-\end{proof}
-\begin{rem}
-    Now we shall prove the set of all $D_\infty$ derivatives acting on this generalized Laurent polynomial ring forms a lie algebra. 
-\end{rem}
-\begin{proof}
-    We need to show the bracket of $D_\infty$ derivatives acting on it satisfies the alternating property and also the Jacobi identity in the discussed context.
-    \begin{align*}
-        [L_m, L_n] &= (m-n)L_{m+n}\\
-        [L_n, L_m] &= (n-m)L_{m+n}\\
-        [L_m, L_n] &= -[L_n, L_m]\\
-    \end{align*}
-    Now for the Jacobi identity. 
-    \begin{align*}
-        [L_m,[L_n, L_p]] &= (n-p)(m-n-p)L_{m+n+p}\\
-        [L_n,[L_p, L_m]] &= (p-m)(n-p-m)L_{m+n+p}\\
-        [L_p[L_m,L_n]] &= (m-n)(p-m-n)L_{m+n+p}\\
-    \end{align*}
-    Which sum to zero so the Jacobi identity holds.
-\end{proof}
-\begin{rem}
-    The set of all $D_\epsilon$ derivatives acting on this ring forms a lie algebra which isn't abelian. 
-\end{rem}
-\begin{proof}
-    We need to show the bracket of $D_\epsilon$ derivatives acting on this ring satisfies the alternating property and the Jacobi identity in the discussed context.
-    \begin{align*}
-        [L_m, L_n] &= (m-n)L_{m+n}\\
-        [L_n, L_m] &= (n-m)L_{m+n}\\
-        [L_m, L_n] &= -[L_n, L_m]\\
-    \end{align*}
-    Now for the Jacobi identity. 
-    \begin{align*}
-        [L_m,[L_n, L_p]] &= (n-p)(m-n-p)L_{m+n+p}\\
-        [L_n,[L_p, L_m]] &= (p-m)(n-p-m)L_{m+n+p}\\
-        [L_p[L_m,L_n]] &= (m-n)(p-m-n)L_{m+n+p}\\
-    \end{align*}
-    Which sum to zero so the Jacobi identity holds.
-\end{proof}
-The anti-derivative of $e^{x}$ is nontrivial. Taking the derivative we get: $\epsilon^{-1} e^{x}e^{\epsilon} - \epsilon^{-1} e^{x}$. We can rewrite this into series.
-\begin{align}
-    \epsilon^{-1} e^{x}e^{\epsilon} - \epsilon^{-1} e^{x} &= e^{x} \sum_{n=0}^{\infty} \frac{\epsilon^{n}}{(n+1)!}
-\end{align}
-Now we may atempt an antiderivative. 
+where $\epsilon$ satisfies $\epsilon^n \epsilon^m = \epsilon^{n+m}$ for all $n,m \in \mathbb{Z}$ \cite{robinson1966}. The operations are:
+and where $\epsilon$ satisfies $\lim_{x \to 0} x$ and $\epsilon \neq 0$.
 \begin{align*}
-    \int e^{x} dx_{\epsilon} &= e^{x} - \int e^{x} \sum_{n=1}^{\infty} \frac{\epsilon^{n}}{(n+1)!} dx_{\epsilon}\\
-    &= e^{x} - \frac{1}{2} \epsilon e^{x} - \int e^{x} \sum_{n=2}^{\infty} \frac{\epsilon^{n}}{(n+1)!} dx_{\epsilon} + \frac{1}{2} \epsilon \int e^{x} \sum_{n=1}^{\infty} \frac{\epsilon^{n}}{(n+1)!} dx_{\epsilon} \\ 
-    &= e^{x} - \frac{1}{2} \epsilon e^{x} - \frac{1}{6} \epsilon^{2} e^{x} - \int e^{x} \sum_{n=3}^{\infty} \frac{\epsilon^{n}}{(n+1)!}dx_{\epsilon}  + \frac{1}{2} \epsilon \int e^x \sum_{n=1}^{\infty} \frac{\epsilon^{n}}{(n+1)!} dx_{\epsilon} + \frac{1}{6} \epsilon^{2} \int e^x \sum_{n=1}^{\infty} \frac{\epsilon^{n}}{(n+1)!} dx_{\epsilon} \\ 
-    \int e^{x} dx_{\epsilon} &= e^{x} - e^x f(\epsilon) + f(\epsilon) \int e^{x} f(\epsilon) dx_{\epsilon}  \\
-    f(\epsilon) &= \sum_{n=0}^{\infty} \frac{\epsilon^{n}}{(n+1)!}\\
-    \sum_{n=0}^{\infty} \frac{\epsilon^{n}}{n!} &= 1 + \epsilon \sum_{n=0}^{\infty} \frac{\epsilon^{n}}{(n+1)!} \\
-    e^\epsilon &= f(x) \epsilon + 1 \\
-    \epsilon^{-1} e^{\epsilon}-\epsilon^{-1} &= f(\epsilon) \\
-    \int e^{x} dx_{\epsilon} &= e^{x} - f(\epsilon) \int e^{x} dx_{\epsilon}\\
-    g(x) &= e^{x} - f(\epsilon) g(x)\\
-    g(x) (1+f(\epsilon)) &= e^x \\
-    g(x) &= \frac{e^{x}}{1+f(\epsilon)} \\
-    \int e^{x} dx_{\epsilon} &= \frac{e^{x}}{1+\epsilon^{-1}e^{\epsilon} -\epsilon^{-1}} + C\\
+\text{Addition: } & \sum a_n \epsilon^n + \sum b_n \epsilon^n = \sum (a_n + b_n) \epsilon^n \\
+\text{Multiplication: } & \left( \sum a_i \epsilon^i \right) \left( \sum b_j \epsilon^j \right) = \sum_{n} \left( \sum_{i+j=n} a_i b_j \right) \epsilon^n
 \end{align*}
-\section{Conclusion}
-This generalization of the hypercomplex unit introduced in the dual numbers may provide relief for obstinate problems in superspaces.
-It is for now a interesting side note in the book of mathematics. 
+
+
+\subsection*{Proof of Ring Axioms for $\HR[\K]$}
+
+
+\begin{proof}
+We verify all ring axioms for $\HR[\K]$:
+
+
+\textbf{Additive Closure:} For $v = \sum_{n=k_v}^{m_v} a_n \epsilon^n$, $w = \sum_{n=k_w}^{m_w} b_n \epsilon^n$, let $k = \min(k_v,k_w)$, $m = \max(m_v,m_w)$. Then:
+\[
+v + w = \sum_{n=k}^{m} (a_n' + b_n') \epsilon^n \in \HR[\K]
+\]
+where $a_n' = a_n$ if $k_v \leq n \leq m_v$ (0 otherwise), and similarly for $b_n'$.
+
+
+\textbf{Additive Associativity:} For $u,v,w \in \HR[\K]$:
+\[
+(u + v) + w = \sum [(a_n + b_n) + c_n] \epsilon^n = \sum [a_n + (b_n + c_n)] \epsilon^n = u + (v + w)
+\]
+by associativity in $\K$.
+
+
+\textbf{Additive Identity:} $0 = \sum 0 \cdot \epsilon^n$ satisfies $v + 0 = v$ for all $v$.
+
+
+\textbf{Additive Inverses:} For $v = \sum a_n \epsilon^n$, define $-v = \sum (-a_n) \epsilon^n$. Then $v + (-v) = 0$.
+
+
+\textbf{Commutative Addition:} $v + w = \sum (a_n + b_n) \epsilon^n = \sum (b_n + a_n) \epsilon^n = w + v$.
+
+
+\textbf{Multiplicative Closure:} For $v = \sum_{i=k_v}^{m_v} a_i \epsilon^i$, $w = \sum_{j=k_w}^{m_w} b_j \epsilon^j$:
+\[
+v \cdot w = \sum_{n=k_v+k_w}^{m_v+m_w} \left( \sum_{\substack{i+j=n \\ k_v \leq i \leq m_v \\ k_w \leq j \leq m_w}} a_i b_j \right) \epsilon^n \in \HR[\K]
+\]
+The inner sum has finitely many terms since $i,j$ are bounded.
+
+
+\textbf{Multiplicative Associativity:} Follows from associativity in $\K$ and $\epsilon^{i}( \epsilon^{j} \epsilon^{k}) = \epsilon^{i+j+k} = (\epsilon^{i} \epsilon^{j})\epsilon^{k}$.
+
+
+\textbf{Distributivity:} For $u,v,w \in \HR[\K]$:
+\begin{align*}
+u(v + w) &= \sum_i a_i \epsilon^i \sum_j (b_j + c_j) \epsilon^j \\
+&= \sum_n \sum_{i+j=n} a_i (b_j + c_j) \epsilon^n \\
+&= \sum_n \left( \sum_{i+j=n} a_i b_j + \sum_{i+j=n} a_i c_j \right) \epsilon^n \\
+&= uv + uw
+\end{align*}
+
+
+\textbf{Multiplicative Identity:} $1 = 1\epsilon^0$ satisfies $1 \cdot v = v$ for all $v$.
+
+
+Thus $\HR[\K]$ is a commutative ring.
+\end{proof}
+\subsection*{Derivative Properties}
+Derivatives in this space are different than in $\C$ or in $\R$. To show this we shall use the limit definition of the derivative on a simple function: $f(x) = x^2$.
+\begin{proof}
+\begin{align*}
+   f'(x) &= \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \\
+   &= \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} \\
+   &= \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x^2}{h} \\
+   &= \lim_{h \to 0} 2x + h \\
+   &= 2x + \epsilon
+\end{align*}
+\end{proof}
+There is no non-trivial function with its own derivative in this space.
+\begin{proof}
+   We take:
+\begin{align*}
+   f(x) &= f'(x) \\
+   f(x) &= \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \\
+   f(x)(\epsilon + 1) &= f(x+\epsilon)\\
+   f(x) &= 0
+\end{align*}
+\end{proof}
+\subsection*{Integral Properties}
+Integration in this space is different than in $\C$ or $\R$ as well. To show this we shall compute the antiderivative of a trivial function. Namely $f(x) = x$.
+\begin{proof}
+\begin{align*}
+   f'(x) &= x \\
+   f(x) &= \frac{x^2}{2} - \frac{\epsilon x}{2}
+\end{align*}
+\end{proof}
+There is no non-trivial function that is its own antiderivative in this space besides the zero function.
+\begin{proof}
+   See the proof there is no $f(x) = f'(x)$.
+\end{proof}
+\subsection*{Recovering Hypercomplex Numbers}
+If we truncate a power of $\epsilon$ such that $\epsilon^k = \{-1,0,+1\}$ for some $k \in \N$ we recover the hypercomplex numbers.
+\begin{proof}
+   A hypercomplex number is an element of a unital algebra generated by a basis in $\{1, i_1, i_2, ..., i_n\}$ with coefficients in a field \cite{Taber1904} such that $i^2_k = \{-1,0,+1 \}$.
+   We can map directly powers of $\epsilon^n$ to these $i_n$ components and then take $n^2 = k$ for $n,k \in \N$ and we are done.
+\end{proof}
 \bibliographystyle{plain}  % or another style like alpha, unsrt, etc.
 \bibliography{references.bib}  % the name of the .bib file
 \end{document}
+
+
+
+
+
+
 
